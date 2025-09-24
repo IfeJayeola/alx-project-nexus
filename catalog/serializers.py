@@ -6,6 +6,16 @@ class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        validated_data.pop('groups', None)
+        validated_data.pop('user_permissions', None)
+        user = User(
+            **validated_data
+        )
+        user.set_password(password)
+        user.save()
+        return user
 
 class ProductSerializers(serializers.ModelSerializer):
     class Meta:
