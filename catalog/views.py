@@ -7,10 +7,30 @@ from rest_framework import viewsets, filters
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):
+    
     queryset = User.objects.all()
     serializer_class = UserSerializers
 
 class ProductViewSet(viewsets.ModelViewSet):
+    """
+    retrieve:
+    Get details of a single product by ID.
+
+    list:
+    Get a list of all products.
+
+    create:
+    Add a new product to the catalog.
+
+    update:
+    Update an existing product.
+
+    partial_update:
+    Partially update an existing product.
+
+    destroy:
+    Delete a product from the catalog.
+    """
     queryset = Product.objects.all()
     serializer_class = ProductSerializers
     filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
@@ -18,6 +38,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     ordering_fields = ['price']
 
 class CategoriesViewSet(viewsets.ModelViewSet):
+
     queryset = Categories.objects.all()
     serializer_class = CategoriesSerializers
 

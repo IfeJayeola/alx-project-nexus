@@ -1,11 +1,13 @@
-from django.db.models import fields_all
+from django.db.models import CharField, fields_all
 from rest_framework import serializers
 from .models import User, Product, Categories
 
 class UserSerializers(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['id', 'password', 'email', 'firstname', 'lastname','role', 'is_active', 'is_staff', 'datejoined']
+
+        password = serializers.CharField(write_only = True, required=True)
     def create(self, validated_data):
         password = validated_data.pop('password')
         validated_data.pop('groups', None)
