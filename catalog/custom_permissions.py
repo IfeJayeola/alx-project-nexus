@@ -16,7 +16,7 @@ class is_StaffOrSelf(permissions.BasePermission):
             return False
 
     def has_object_permission(self, request, view, obj):
-        return request.user = Role.STAFF or obj == request.user
+        return request.user == Role.STAFF or obj == request.user
 
         
 class is_StaffOrViewOnly(permissions.BasePermission):

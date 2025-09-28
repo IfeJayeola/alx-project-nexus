@@ -2,7 +2,7 @@ import uuid
 from django.contrib.auth.models import  AbstractBaseUser
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin
-from .custom_user import Role, CustomUserManager
+from .custom_user import Role, CustomUserManager, PaymentStatus
 # Create your models here.
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -97,3 +97,4 @@ class Product(models.Model):
         related_name = "products"
     )
     
+

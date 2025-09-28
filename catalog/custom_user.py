@@ -1,4 +1,6 @@
+from asyncio.base_futures import _PENDING
 from django.contrib.auth.models import BaseUserManager
+from django.core.validators import ProhibitNullCharactersValidator
 from django.db import models
 
 class Role(models.TextChoices):
@@ -21,3 +23,12 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         return self.create_user(email, password, **extra_fields)
+
+
+
+class PaymentStatus(models.Choices):
+    PENDING = 'pending', 'Pending'
+    PAID  = 'paid', 'Paid'
+    FAILED = 'failed', 'Failed'
+    CANCELLED = 'cancelled', 'Cancelled'
+

@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from django.shortcuts import render
-from rest_framework.permissions import permissions 
+from rest_framework import permissions 
 from .custom_permissions import is_SellerOrViewOnly, is_Staff, is_StaffOrViewOnly, is_StaffOrSelf
 from .models import Categories, User,  Product, Categories
 from .serializers import UserSerializers, ProductSerializers, CategoriesSerializers
@@ -9,6 +9,27 @@ from rest_framework import viewsets, filters
 # Create your views here.
 
 class UserViewSet(viewsets.ModelViewSet):   
+
+    """
+    
+    retrieve:
+    Get details of a single user by ID.
+
+    list:
+    Get a list of all users
+
+    create:
+    Add a new user to the catalog.
+
+    update:
+    Update an existing user.
+
+    partial_update:
+    Partially update an existing user.
+
+    destroy:
+    Delete a user from the catalog.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializers
     permission_classes = [is_StaffOrSelf]
@@ -40,27 +61,28 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_fields = ['category']
     ordering_fields = ['price']
     permission_classes = [is_SellerOrViewOnly]
+    
 
 class CategoriesViewSet(viewsets.ModelViewSet):
     """
     
     retrieve:
-    Get details of a single prod by ID.
+    Get details of a single category by ID.
 
     list:
-    Get a list of all products.
+    Get a list of all categories
 
     create:
-    Add a new product to the catalog.
+    Add a new category to the catalog.
 
     update:
-    Update an existing product.
+    Update an existing category.
 
     partial_update:
-    Partially update an existing product.
+    Partially update an existing category.
 
     destroy:
-    Delete a product from the catalog.
+    Delete a category from the catalog.
     """
 
     queryset = Categories.objects.all()
