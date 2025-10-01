@@ -162,9 +162,19 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-
+BASE_URL = os.environ.get('BASE_URL', 'http://localhost:8000')
+CHAPA_BASE_URL = os.environ.get('CHAPA_BASE_URL', 'https://api.chapa.co/v1')
+CHAPA_SECRET_KEY = os.environ.get('CHAPA_SECRET_KEY', '')
+CHAPA_PUBLIC_KEY = os.environ.get('CHAPA_PUBLIC_KEY', '')
 
 SWAGGER_SETTINGS = {
-    'LOGIN_URL': '/api/token/',
-    'LOGOUT_URL': '/api/token/refresh/',
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description': 'JWT Authorization header. Example: "Bearer <token>"',
+        }
+    },
+    'USE_SESSION_AUTH': False, 
 }
