@@ -110,7 +110,8 @@ class CartViewSet(viewsets.ViewSet):
         method="post",
         request_body=AddItemSerializer,
         responses={200: "Item updated successfully"}
-    )    @action(detail=False, methods=["post"])
+    )
+    @action(detail=False, methods=["post"])
     def add_item(self, request):
         serializer = AddItemSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
